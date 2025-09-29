@@ -33,6 +33,19 @@ This repository contains the necessary tooling to work on KNXT projects. It uses
 
 ## Working with Submodules
 
+### Quick Commands
+
+| Action | Command |
+|--------|---------|
+| Work on submodule | `cd knxt-api` → make changes → `git add .` → `git commit` → `git push` |
+| Update workspace | `cd ..` → `git add knxt-api` → `git commit` → `git push` |
+| Get latest changes | `git submodule update --remote` |
+| Check status | `git submodule status` |
+| Switch submodule branch | `cd knxt-api` → `git checkout branch-name` |
+| Update parent workspace | `cd ..` → `git add knxt-api` → `git commit` → `git push` |
+| Check submodule branch | `cd knxt-api` → `git branch` |
+| Configure default branch | `git config -f .gitmodules submodule.knxt-api.branch branch-name` |
+
 ### Updating Submodules
 
 To update all submodules to their latest commits:
@@ -68,6 +81,24 @@ git submodule update --remote knxt_referentiels
    git push
    ```
 
+### Branch Management
+
+Submodules are not locked to the main branch. You can switch branches within submodules:
+
+```bash
+# Switch to a different branch in submodule
+cd knxt-api
+git checkout feature/new-endpoint
+
+# Update parent workspace to reflect branch change
+cd ..
+git add knxt-api
+git commit -m "Switch knxt-api to feature/new-endpoint branch"
+git push origin main
+```
+
+**Important**: The parent workspace records specific commit hashes, not branch names. Always commit branch changes in the parent workspace.
+
 ## Cursor IDE Integration
 
 This workspace is optimized for Cursor IDE. Both repositories will be available in the file explorer, and you can:
@@ -85,3 +116,25 @@ knxt-workbench/
 ├── knxt_referentiels/  # Documentation and referentials
 └── README.md          # This file
 ```
+
+## Best Practices
+
+1. **Always commit submodule changes twice**:
+   - Once in the submodule
+   - Once in the parent workspace
+
+2. **Use descriptive commit messages**:
+   - In submodule: "Add new API endpoint for user management"
+   - In workspace: "Update knxt-api to include new user endpoint"
+
+3. **Regular updates**: Run `git submodule update --remote` regularly to stay current
+
+4. **Team coordination**: Communicate when you're updating submodules so team members know to pull changes
+
+5. **Document branch changes**: Use clear commit messages when switching branches
+
+6. **Coordinate with team**: Let others know when you're switching submodule branches
+
+7. **Use consistent branching**: Consider using the same branch names across submodules
+
+8. **Regular updates**: Run `git submodule update --remote` to stay current with branch changes
