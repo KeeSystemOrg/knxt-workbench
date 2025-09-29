@@ -1,0 +1,6 @@
+[submodule "knxt-api"]
+	path = knxt-api
+	url = git@github.com:KeeSystemOrg/knxt-api.git
+[submodule "knxt_referentiels"]
+	path = knxt_referentiels
+	url = git@github.com:KeeSystemOrg/KNXT_referentiels.git
